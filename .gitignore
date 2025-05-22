@@ -1,0 +1,13 @@
+# Node modules
+node_modules/
+
+# dotenv (variáveis de ambiente)
+.env
+
+# IDEs e editores
+.vscode/
+
+
+
+
+
