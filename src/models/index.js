@@ -26,9 +26,9 @@ fs.readdirSync(__dirname)
 // Executa associações entre os modelos, se existirem
 Object.keys(modelos).forEach((nomeModelo) => {
   const modelo = modelos[nomeModelo];
-  if (typeof modelo.associar === 'function') {
-    modelo.associar(modelos);
-  }
+ if (typeof modelo.associate === 'function') {
+  modelo.associate(modelos);
+}
 });
 
 // Exporta os modelos, a conexão e a classe Sequelize
