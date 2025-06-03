@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Vendedor.associate = (models) => {
     Vendedor.hasMany(models.Venda, {
-      foreignKey: 'vendedor_id'
+      foreignKey: 'vendedorId'
     });
   };
 

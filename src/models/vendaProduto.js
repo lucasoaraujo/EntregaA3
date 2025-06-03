@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 
   VendaProduto.associate = (models) => {
     VendaProduto.belongsTo(models.Venda, {
-      foreignKey: 'venda_id'
+      foreignKey: 'vendaId'
     });
 
     VendaProduto.belongsTo(models.Produto, {
