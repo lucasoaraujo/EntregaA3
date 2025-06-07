@@ -9,4 +9,3 @@ router.put('/:id', vendedorController.atualizarVendedor);
 router.delete('/:id', vendedorController.deletarVendedor);
 
 module.exports = router;
-''
