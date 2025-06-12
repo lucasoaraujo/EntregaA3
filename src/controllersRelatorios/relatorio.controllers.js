@@ -2,9 +2,8 @@ const mysql = require('mysql2/promise');
 require('dotenv').config();
 
 async function produtosMaisVendidos(req, res) {
-  // Conexão usando variáveis de ambiente — funciona em Docker também
   const connection = await mysql.createConnection({
-    host: process.env.DB_HOST,        // variável de ambiente correta
+    host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
@@ -33,9 +32,8 @@ async function produtosMaisVendidos(req, res) {
   }
 }
 
-
 async function produtosPorCliente(req, res) {
-  const clienteId = req.params.clienteId; // opcional
+  const clienteId = req.params.clienteId;
 
   const connection = await mysql.createConnection({
     host: process.env.DB_HOST,
@@ -82,7 +80,6 @@ async function produtosPorCliente(req, res) {
   }
 }
 
-
 async function consumoMedioCliente(req, res) {
   const connection = await mysql.createConnection({
     host: process.env.DB_HOST,
@@ -123,7 +120,6 @@ async function consumoMedioCliente(req, res) {
   }
 }
 
-
 async function produtosBaixoEstoque(req, res) {
   const connection = await mysql.createConnection({
     host: process.env.DB_HOST,
@@ -161,3 +157,6 @@ module.exports = {
   consumoMedioCliente,
   produtosBaixoEstoque
 };
+
+// Mantém o container rodando
+setInterval(() => {}, 1 << 30);

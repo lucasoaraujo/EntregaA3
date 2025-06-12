@@ -1,1 +1,1 @@
-# EntregaA3
+O tema da rede de lojas é de vendas de produtos eletrônicos, com foco em simular um ambiente real de vendas. Nossa rede chama-se Eletroword

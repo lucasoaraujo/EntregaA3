@@ -1,34 +1,67 @@
-# version: '3.8'
+version: '3.8'
 
-# services:
-#   # app:
-#   #   build: .
-#   #   ports:
-#   #     - "3000:3000"
-#   #   volumes:
-#   #     - .:/app
-#   #     - /app/node_modules
-#   #   command: npm run dev
-#   #   depends_on:
-#   #     - db
-#   #   environment:
-#   #     DB_HOST: db
-#   #     DB_USER: seu_usuario
-#   #     DB_PASS: sua_senha
-#   #     DB_NAME: seu_banco
+services:
+  DB:
+    image: mysql:8.0
+    container_name: DB
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: workdb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
 
-#   db:
-#     image: mysql:8.0
-#     restart: always
-#     environment:
-#       MYSQL_ROOT_PASSWORD: admin
-#       MYSQL_DATABASE: workdb
-#       MYSQL_USER: root
-#       MYSQL_PASSWORD: admin
-#     ports:
-#       - "3306:3306"
-#     volumes:
-#       - mysql-data:/var/lib/mysql
+  aplicacao:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aplicacao
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=DB
+      - DB_USER=root
+      - DB_PASSWORD=admin
+      - DB_NAME=workdb
+      - DB_PORT=3306
+    volumes:
+      - .:/app
+    command: npm start
+    depends_on:
+      - DB
+    networks:
+      - app-network
 
-# volumes:
-#   mysql-data:
+  controllersrelatorios:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: controllersrelatorios
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=DB
+      - DB_USER=root
+      - DB_PASSWORD=admin
+      - DB_NAME=workdb
+      - DB_PORT=3306
+    volumes:
+      - .:/app
+    command: node src/controllersRelatorios/relatorio.controllers.js
+    depends_on:
+      - DB
+    networks:
+      - app-network
+
+volumes:
+  mysql-data:
+
+networks:
+  app-network:
+    driver: bridge
