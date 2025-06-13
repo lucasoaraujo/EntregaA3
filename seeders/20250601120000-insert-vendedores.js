@@ -117,7 +117,7 @@ module.exports = {
 
     // Busca CPFs já existentes para evitar duplicação
     const existing = await queryInterface.sequelize.query(
-      `SELECT cpf FROM vendedors WHERE cpf IN (${vendedores.map(v => `'${v.cpf}'`).join(',')})`,
+      `SELECT cpf FROM vendedores WHERE cpf IN (${vendedores.map(v => `'${v.cpf}'`).join(',')})`,
       { type: Sequelize.QueryTypes.SELECT }
     );
 
@@ -126,13 +126,13 @@ module.exports = {
     const novosVendedores = vendedores.filter(v => !existingCpfs.includes(v.cpf));
 
     if (novosVendedores.length > 0) {
-      await queryInterface.bulkInsert('vendedors', novosVendedores, {});
+      await queryInterface.bulkInsert('vendedores', novosVendedores, {});
     } else {
       console.log('Todos os vendedores já existem. Nenhuma inserção realizada.');
     }
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('vendedors', null, {});
+    await queryInterface.bulkDelete('vendedores', null, {});
   }
 };

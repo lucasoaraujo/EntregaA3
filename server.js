@@ -11,8 +11,9 @@ app.get('/', (req, res) => {
     res.send('Olá Mundo!');
 });
 
-bancoDeDados.conexao.sync()
+bancoDeDados.conexao.sync({ force: false })
     .then(() => {
+        console.log("Banco de dados conectado com sucesso!");
         app.listen(port, () => {
             console.log(`Iniciando projeto na porta ${port}`);
         });

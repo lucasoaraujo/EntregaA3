@@ -37,28 +37,6 @@ services:
     networks:
       - app-network
 
-  controllersrelatorios:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: controllersrelatorios
-    ports:
-      - "3002:3002"
-    environment:
-      - NODE_ENV=development
-      - DB_HOST=DB
-      - DB_USER=root
-      - DB_PASSWORD=admin
-      - DB_NAME=workdb
-      - DB_PORT=3306
-    volumes:
-      - .:/app
-    command: node src/controllersRelatorios/relatorio.controllers.js
-    depends_on:
-      - DB
-    networks:
-      - app-network
-
 volumes:
   mysql-data:
 
