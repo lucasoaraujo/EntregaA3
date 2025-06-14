@@ -65,8 +65,9 @@ O **Eletroword** é um sistema desenvolvido para a disciplina de **Sistemas Dist
 Antes de rodar o projeto, crie um arquivo `.env` na raiz com o seguinte conteúdo:
 
 ```env
-DB_HOST=db
+DB_HOST=DB
 DB_USER=root
-DB_PASSWORD=sua_senha
-DB_NAME=eletroword_db
+DB_PASSWORD=admin
+DB_NAME=workdb
 DB_PORT=3306
+
