@@ -16,7 +16,7 @@ async function produtosMaisVendidos(req, res) {
         p.id AS produto_id,
         p.nome AS produto_nome,
         SUM(vp.quantidade) AS total_vendido
-      FROM VendaProdutos vp
+      FROM vendaProdutos vp
       JOIN Produtos p ON p.id = vp.produtoId
       GROUP BY p.id, p.nome
       ORDER BY total_vendido DESC
@@ -53,7 +53,7 @@ async function produtosPorCliente(req, res) {
         SUM(vp.quantidade) AS quantidade_comprada
       FROM clientes c
       JOIN vendas v ON v.clienteId = c.id
-      JOIN vendaprodutos vp ON vp.vendaId = v.id
+      JOIN vendaProdutos vp ON vp.vendaId = v.id
       JOIN produtos p ON p.id = vp.produtoId
     `;
 
@@ -102,7 +102,7 @@ async function consumoMedioCliente(req, res) {
           vp.produtoId,
           SUM(vp.quantidade) AS total_quantidade
         FROM vendas v
-        JOIN vendaprodutos vp ON vp.vendaId = v.id
+        JOIN vendaProdutos vp ON vp.vendaId = v.id
         GROUP BY v.clienteId, vp.produtoId
       ) AS vendas_por_produto ON vendas_por_produto.clienteId = c.id
       GROUP BY c.id, c.nome

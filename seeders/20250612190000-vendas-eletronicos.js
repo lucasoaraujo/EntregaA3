@@ -42,11 +42,11 @@ module.exports = {
 
     await queryInterface.bulkInsert('vendas', vendas, {});
 
-    await queryInterface.bulkInsert('vendaprodutos', vendaProdutos, {});
+    await queryInterface.bulkInsert('vendaProdutos', vendaProdutos, {});
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('vendaprodutos', null, {});
+    await queryInterface.bulkDelete('vendaProdutos', null, {});
     await queryInterface.bulkDelete('vendas', null, {});
   }
 };

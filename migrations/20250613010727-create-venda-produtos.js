@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('VendaProdutos', {
+    await queryInterface.createTable('vendaProdutos', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,17 +19,11 @@ module.exports = {
       },
       vendaId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Vendas', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        allowNull: false
       },
       produtoId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Produtos', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -42,9 +36,35 @@ module.exports = {
         defaultValue: Sequelize.fn('NOW')
       }
     });
+
+    // FK vendaId → vendas
+    await queryInterface.addConstraint('vendaProdutos', {
+      fields: ['vendaId'],
+      type: 'foreign key',
+      name: 'fk_vendaProdutos_vendaId',
+      references: {
+        table: 'vendas',
+        field: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
+    });
+
+    // FK produtoId → produtos
+    await queryInterface.addConstraint('vendaProdutos', {
+      fields: ['produtoId'],
+      type: 'foreign key',
+      name: 'fk_vendaProdutos_produtoId',
+      references: {
+        table: 'produtos',
+        field: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
+    });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('VendaProdutos');
+    await queryInterface.dropTable('vendaProdutos');
   }
 };

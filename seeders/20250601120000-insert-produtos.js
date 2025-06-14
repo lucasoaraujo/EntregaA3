@@ -107,10 +107,10 @@ module.exports = {
       }
     ];
 
-    return queryInterface.bulkInsert('Produtos', produtos, {});
+    return queryInterface.bulkInsert('produtos', produtos, {});
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('Produtos', null, {});
+    return queryInterface.bulkDelete('produtos', null, {});
   }
 };
